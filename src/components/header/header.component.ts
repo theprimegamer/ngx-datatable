@@ -108,7 +108,7 @@ export class DataTableHeaderComponent {
   @Output() resize: EventEmitter<any> = new EventEmitter();
   @Output() select: EventEmitter<any> = new EventEmitter();
   @Output() filter: EventEmitter<any> = new EventEmitter();
-  filters: any = []
+  filters: any = [];
 
   columnsByPin: any;
   columnGroupWidths: any;
@@ -208,8 +208,8 @@ export class DataTableHeaderComponent {
   }
 
   filterChanged(event: any) {
-    var filter = this.filters.find((x) => {
-      if (x.column == event.column)
+    const filter = this.filters.find((x) => {
+      if (x.column === event.column)
         return true;
       return false;
     });
@@ -217,13 +217,13 @@ export class DataTableHeaderComponent {
     if (filter == null) {
       this.filters.push(event);
     } else {
-      if (filter.value == "")
-        this.filters.remove(filter);
-      else
+      if (event.value == '') {
+        const index = this.filters.indexOf(filter);
+        this.filters.splice(index, 1);
+      } else
         filter.value = event.value;
     }
 
-    console.log(this.filters);
     this.filter.emit(this.filters);
   }
 

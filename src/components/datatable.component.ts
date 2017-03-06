@@ -37,7 +37,8 @@ import { DatatableRowDetailDirective } from './row-detail';
         (sort)="onColumnSort($event)"
         (resize)="onColumnResize($event)"
         (reorder)="onColumnReorder($event)"
-        (select)="onHeaderSelect($event)">
+        (select)="onHeaderSelect($event)"
+        (filter)="filtersChanged($event)">
       </datatable-header>
       <datatable-body
         [rows]="rows"
@@ -417,6 +418,14 @@ export class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
    * @memberOf DatatableComponent
    */
   @Output() sort: EventEmitter<any> = new EventEmitter();
+
+  /**
+   * Filters changed.
+   *
+   * @type {EventEmitter<any>}
+   * @memberOf DatatableComponent
+   */
+  @Output() filter: EventEmitter<any> = new EventEmitter();
 
   /**
    * The table was paged either triggered by the pager or the body scroll.
@@ -1003,4 +1012,15 @@ export class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
     this.select.emit(event);
   }
 
+  /**
+   * A filter was changed in the header
+   * 
+   * @param {*} event
+   * 
+   * @memberOf DatatableComponent
+   */
+   filtersChanged(event: any): void {
+     console.log(event);
+      this.filter.emit(event);
+   }
 }

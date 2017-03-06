@@ -1,5 +1,5 @@
 import {
-  Component, Input, EventEmitter, Output, HostBinding
+  Component, Input, EventEmitter, Output, HostBinding, OnInit
 } from '@angular/core';
 
 import { SortDirection, SortType, SelectionType } from '../../types';
@@ -25,7 +25,7 @@ import { nextSortDir } from '../../utils';
     }
     ` ]
 })
-export class DataTableHeaderCellFilterComponent {
+export class DataTableHeaderCellFilterComponent implements OnInit {
 
   @Input() column: any;
   @Input() allRowsSelected: boolean;
@@ -34,8 +34,9 @@ export class DataTableHeaderCellFilterComponent {
   @HostBinding('style.height.px')
   @Input() headerHeight: number;
 
+  @Input() minCharacterFilter: number;
   @Output() filter: EventEmitter<any> = new EventEmitter();
-  previousFilterValue: string = "";
+  previousFilterValue: string = '';
   @Output() select: EventEmitter<any> = new EventEmitter();
 
   @HostBinding('class')
@@ -79,9 +80,14 @@ export class DataTableHeaderCellFilterComponent {
       this.selectionType === SelectionType.checkbox;
   }
 
+  ngOnInit() {
+    if (this.minCharacterFilter == null)
+      this.minCharacterFilter = 3;
+  }
+
   inputChanged(e) {
-    var newValue = e.target.value;
-    if (this.previousFilterValue != newValue) {
+    const newValue = e.target.value;
+    if ((newValue.length >= this.minCharacterFilter || newValue.length == 0) && this.previousFilterValue !== newValue) {
       this.previousFilterValue = newValue;
       this.filter.emit({column: this.prop, value: e.target.value});
     }
