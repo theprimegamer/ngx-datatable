@@ -18,6 +18,8 @@ export declare class DataTableHeaderComponent {
     reorder: EventEmitter<any>;
     resize: EventEmitter<any>;
     select: EventEmitter<any>;
+    filter: EventEmitter<any>;
+    filters: any;
     columnsByPin: any;
     columnGroupWidths: any;
     _columns: any[];
@@ -30,4 +32,5 @@ export declare class DataTableHeaderComponent {
     onSort({column, prevValue, newValue}: any): void;
     calcNewSorts(column: any, prevValue: number, newValue: number): any[];
     stylesByGroup(group: string): any;
+    filterChanged(event: any): void;
 }

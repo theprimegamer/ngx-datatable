@@ -1,4 +1,4 @@
-import { ElementRef, EventEmitter, OnInit, QueryList, AfterViewInit, IterableDiffer, DoCheck, KeyValueDiffers } from '@angular/core';
+import { ElementRef, EventEmitter, OnInit, QueryList, AfterViewInit, DoCheck, KeyValueDiffers, KeyValueDiffer } from '@angular/core';
 import { ColumnMode, SortType, SelectionType } from '../types';
 import { DataTableBodyComponent } from './body';
 import { DataTableColumnDirective } from './columns';
@@ -255,6 +255,13 @@ export declare class DatatableComponent implements OnInit, AfterViewInit, DoChec
      */
     sort: EventEmitter<any>;
     /**
+     * Filters changed.
+     *
+     * @type {EventEmitter<any>}
+     * @memberOf DatatableComponent
+     */
+    filter: EventEmitter<any>;
+    /**
      * The table was paged either triggered by the pager or the body scroll.
      *
      * @type {EventEmitter<any>}
@@ -411,7 +418,7 @@ export declare class DatatableComponent implements OnInit, AfterViewInit, DoChec
     bodyHeight: number;
     rowCount: number;
     offsetX: number;
-    rowDiffer: IterableDiffer;
+    rowDiffer: KeyValueDiffer;
     _count: number;
     _rows: any[];
     _columns: any[];
@@ -462,7 +469,7 @@ export declare class DatatableComponent implements OnInit, AfterViewInit, DoChec
      * distribution mode and scrollbar offsets.
      *
      * @param {any[]} [columns=this.columns]
-     * @param {number} [forceIdx=false]
+     * @param {number} [forceIdx=-1]
      * @param {boolean} [allowBleed=this.scrollH]
      * @returns {any[]}
      *
@@ -565,4 +572,12 @@ export declare class DatatableComponent implements OnInit, AfterViewInit, DoChec
      * @memberOf DatatableComponent
      */
     onBodySelect(event: any): void;
+    /**
+     * A filter was changed in the header
+     *
+     * @param {*} event
+     *
+     * @memberOf DatatableComponent
+     */
+    filtersChanged(event: any): void;
 }
