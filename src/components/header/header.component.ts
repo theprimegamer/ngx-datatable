@@ -41,6 +41,25 @@ import { DataTableColumnDirective } from '../columns';
         </datatable-header-cell>
       </div>
     </div>
+    <div
+      [style.width.px]="columnGroupWidths.total"
+      class="datatable-header-inner">
+      <div
+        *ngFor="let colGroup of columnsByPin; trackBy: trackByGroups"
+        [class]="'datatable-row-' + colGroup.type"
+        [ngStyle]="stylesByGroup(colGroup.type)">
+        <datatable-header-cell-filter
+          *ngFor="let column of colGroup.columns; trackBy: columnTrackingFn"
+          resizeable
+          [resizeEnabled]="column.resizeable"
+          (resize)="onColumnResized($event, column)"
+          [headerHeight]="headerHeight"
+          [column]="column"
+          (select)="select.emit($event)"
+          (filter)="filterChanged($event)">
+        </datatable-header-cell-filter>
+      </div>
+    </div>
   `,
   host: {
     class: 'datatable-header'
@@ -61,7 +80,7 @@ export class DataTableHeaderComponent {
 
   @HostBinding('style.height')
   @Input() set headerHeight(val: any) {
-    if(val !== 'auto') { 
+    if(val !== 'auto') {
       this._headerHeight = `${val}px`;
     } else {
       this._headerHeight = val;
@@ -80,14 +99,16 @@ export class DataTableHeaderComponent {
     this.columnGroupWidths = columnGroupWidths(colsByPin, val);
   }
 
-  get columns(): any[] { 
-    return this._columns; 
+  get columns(): any[] {
+    return this._columns;
   }
 
   @Output() sort: EventEmitter<any> = new EventEmitter();
   @Output() reorder: EventEmitter<any> = new EventEmitter();
   @Output() resize: EventEmitter<any> = new EventEmitter();
   @Output() select: EventEmitter<any> = new EventEmitter();
+  @Output() filter: EventEmitter<any> = new EventEmitter();
+  filters: any = []
 
   columnsByPin: any;
   columnGroupWidths: any;
@@ -184,6 +205,26 @@ export class DataTableHeaderComponent {
     }
 
     return styles;
+  }
+
+  filterChanged(event: any) {
+    var filter = this.filters.find((x) => {
+      if (x.column == event.column)
+        return true;
+      return false;
+    });
+
+    if (filter == null) {
+      this.filters.push(event);
+    } else {
+      if (filter.value == "")
+        this.filters.remove(filter);
+      else
+        filter.value = event.value;
+    }
+
+    console.log(this.filters);
+    this.filter.emit(this.filters);
   }
 
 }

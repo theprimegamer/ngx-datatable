@@ -11,7 +11,7 @@ import { Component } from '@angular/core';
         [loadingIndicator]="loadingIndicator"
         [columns]="columns"
         [columnMode]="'force'"
-        [headerHeight]="50"
+        [headerHeight]="100"
         [footerHeight]="50"
         [rowHeight]="'auto'">
       </ngx-datatable>

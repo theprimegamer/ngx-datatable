@@ -10,15 +10,15 @@ import { nextSortDir } from '../../utils';
   template: `
     <div>
       <label
-        *ngIf="isCheckboxable" 
+        *ngIf="isCheckboxable"
         class="datatable-checkbox">
-        <input 
+        <input
           type="checkbox"
           [attr.checked]="allRowsSelected"
-          (change)="select.emit(!allRowsSelected)" 
+          (change)="select.emit(!allRowsSelected)"
         />
       </label>
-      <span 
+      <span
         *ngIf="!column.headerTemplate"
         class="datatable-header-cell-wrapper">
         <span
@@ -30,8 +30,8 @@ import { nextSortDir } from '../../utils';
       <template
         *ngIf="column.headerTemplate"
         [ngTemplateOutlet]="column.headerTemplate"
-        [ngOutletContext]="{ 
-          column: column, 
+        [ngOutletContext]="{
+          column: column,
           sortDir: sortDir,
           sortFn: sortFn
         }">
@@ -105,8 +105,8 @@ export class DataTableHeaderCellComponent {
   }
 
   get isCheckboxable(): boolean {
-    return this.column.checkboxable && 
-      this.column.headerCheckboxable && 
+    return this.column.checkboxable &&
+      this.column.headerCheckboxable &&
       this.selectionType === SelectionType.checkbox;
   }
 
