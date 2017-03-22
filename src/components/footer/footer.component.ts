@@ -13,7 +13,7 @@ import {
           {{selectedCount.toLocaleString()}} {{selectedMessage}} / 
         </span>
 
-        {{rowCount.toLocaleString()}} {{totalMessage}}
+        Showing {{firstItemNumber.toLocaleString()}} - {{lastItemNumber.toLocaleString()}} of  {{rowCount.toLocaleString()}}
       </div>
       <datatable-pager
         [pagerLeftArrowIcon]="pagerLeftArrowIcon"
@@ -58,4 +58,11 @@ export class DataTableFooterComponent {
     return this.offset + 1;
   }
 
+  get firstItemNumber(): number {
+    return this.offset * this.pageSize + 1;
+  }
+
+  get lastItemNumber(): number {
+    return Math.min(this.curPage * this.pageSize, this.rowCount);
+  }
 }

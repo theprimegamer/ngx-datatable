@@ -5,7 +5,7 @@ export declare class DataTableHeaderCellFilterComponent implements OnInit {
     allRowsSelected: boolean;
     selectionType: SelectionType;
     headerHeight: number;
-    minCharacterFilter: number;
+    minFilterLength: number;
     filter: EventEmitter<any>;
     previousFilterValue: string;
     select: EventEmitter<any>;

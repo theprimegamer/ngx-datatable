@@ -227,6 +227,13 @@ export declare class DatatableComponent implements OnInit, AfterViewInit, DoChec
      */
     trackByProp: string;
     /**
+     * Controls the minimum string length that the datatable will filter on.
+     *
+     * @type {number}
+     * @memberOf DatatableComponent
+     */
+    minFilterLength: number;
+    /**
      * Body was scrolled typically in a `scrollbarV:true` scenario.
      *
      * @type {EventEmitter<any>}

@@ -12,6 +12,7 @@ export declare class DataTableHeaderComponent {
     allRowsSelected: boolean;
     selectionType: SelectionType;
     reorderable: boolean;
+    minFilterLength: number;
     headerHeight: any;
     columns: any[];
     sort: EventEmitter<any>;

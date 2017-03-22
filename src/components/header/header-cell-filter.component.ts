@@ -34,7 +34,7 @@ export class DataTableHeaderCellFilterComponent implements OnInit {
   @HostBinding('style.height.px')
   @Input() headerHeight: number;
 
-  @Input() minCharacterFilter: number;
+  @Input() minFilterLength: number;
   @Output() filter: EventEmitter<any> = new EventEmitter();
   previousFilterValue: string = '';
   @Output() select: EventEmitter<any> = new EventEmitter();
@@ -81,13 +81,13 @@ export class DataTableHeaderCellFilterComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.minCharacterFilter == null)
-      this.minCharacterFilter = 3;
+    if (this.minFilterLength == null)
+      this.minFilterLength = 3;
   }
 
   inputChanged(e) {
     const newValue = e.target.value;
-    if ((newValue.length >= this.minCharacterFilter || newValue.length == 0) && this.previousFilterValue !== newValue) {
+    if ((newValue.length >= this.minFilterLength || newValue.length == 0) && this.previousFilterValue !== newValue) {
       this.previousFilterValue = newValue;
       this.filter.emit({column: this.prop, value: e.target.value});
     }

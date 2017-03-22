@@ -34,6 +34,7 @@ import { DatatableRowDetailDirective } from './row-detail';
         [sortDescendingIcon]="cssClasses.sortDescending"
         [allRowsSelected]="allRowsSelected"
         [selectionType]="selectionType"
+        [minFilterLength]="minFilterLength"
         (sort)="onColumnSort($event)"
         (resize)="onColumnResize($event)"
         (reorder)="onColumnReorder($event)"
@@ -47,7 +48,7 @@ import { DatatableRowDetailDirective } from './row-detail';
         [loadingIndicator]="loadingIndicator"
         [rowHeight]="rowHeight"
         [rowCount]="rowCount"
-        [offset]="offset"
+        [offset]="0"
         [trackByProp]="trackByProp"
         [columns]="columns"
         [pageSize]="pageSize"
@@ -386,6 +387,14 @@ export class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
    * @memberOf DatatableComponent
    */
   @Input() trackByProp: string;
+
+  /**
+   * Controls the minimum string length that the datatable will filter on.
+   * 
+   * @type {number}
+   * @memberOf DatatableComponent
+   */
+  @Input() minFilterLength: number;
 
   /**
    * Body was scrolled typically in a `scrollbarV:true` scenario.
@@ -840,7 +849,7 @@ export class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
    */
   onFooterPage(event: any) {
     this.offset = event.page - 1;
-    this.bodyComponent.updateOffsetY(this.offset);
+    this.bodyComponent.updateOffsetY(event.page - 1);
 
     this.page.emit({
       count: this.count,
@@ -972,6 +981,7 @@ export class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
       this._rows = sortRows(this.rows, this.columns, sorts);
     }
 
+    this.offset = 0;
     this.sorts = sorts;
     this.bodyComponent.updateOffsetY(0);
     this.sort.emit(event);
@@ -1020,7 +1030,7 @@ export class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
    * @memberOf DatatableComponent
    */
    filtersChanged(event: any): void {
-     console.log(event);
+      this.offset = 0;
       this.filter.emit(event);
    }
 }

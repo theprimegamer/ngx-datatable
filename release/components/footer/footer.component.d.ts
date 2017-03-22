@@ -14,4 +14,6 @@ export declare class DataTableFooterComponent {
     page: EventEmitter<any>;
     readonly isVisible: boolean;
     readonly curPage: number;
+    readonly firstItemNumber: number;
+    readonly lastItemNumber: number;
 }

@@ -55,6 +55,7 @@ import { DataTableColumnDirective } from '../columns';
           (resize)="onColumnResized($event, column)"
           [headerHeight]="headerHeight"
           [column]="column"
+          [minFilterLength]="minFilterLength"
           (select)="select.emit($event)"
           (filter)="filterChanged($event)">
         </datatable-header-cell-filter>
@@ -77,6 +78,7 @@ export class DataTableHeaderComponent {
   @Input() allRowsSelected: boolean;
   @Input() selectionType: SelectionType;
   @Input() reorderable: boolean;
+  @Input() minFilterLength: number;
 
   @HostBinding('style.height')
   @Input() set headerHeight(val: any) {
