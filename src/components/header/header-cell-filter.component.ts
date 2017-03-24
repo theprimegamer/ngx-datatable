@@ -10,11 +10,10 @@ import { nextSortDir } from '../../utils';
   template: `
     <div>
       <span
-        *ngIf="!column.headerTemplate"
         class="datatable-header-cell-wrapper">
         <span
           class="datatable-header-cell-label">
-          <input class="form-control" (keyup)="inputChanged($event)" placeholder="Filter {{name}}..."/>
+          <input *ngIf="showFilter" class="form-control" (keyup)="inputChanged($event)" placeholder="Filter {{name}}..."/>
         </span>
       </span>
     </div>
@@ -57,6 +56,10 @@ export class DataTableHeaderCellFilterComponent implements OnInit {
 
   get prop(): string {
     return this.column.prop;
+  }
+
+  get showFilter(): boolean {
+    return !this.column.hideFilter;
   }
 
   @HostBinding('style.minWidth.px')

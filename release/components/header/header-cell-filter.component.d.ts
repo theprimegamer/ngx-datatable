@@ -12,6 +12,7 @@ export declare class DataTableHeaderCellFilterComponent implements OnInit {
     readonly columnCssClasses: any;
     readonly name: string;
     readonly prop: string;
+    readonly showFilter: boolean;
     readonly minWidth: number;
     readonly maxWidth: number;
     readonly width: number;

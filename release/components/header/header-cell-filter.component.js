@@ -35,6 +35,13 @@ var DataTableHeaderCellFilterComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(DataTableHeaderCellFilterComponent.prototype, "showFilter", {
+        get: function () {
+            return !this.column.hideFilter;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(DataTableHeaderCellFilterComponent.prototype, "minWidth", {
         get: function () {
             return this.column.minWidth;
@@ -79,7 +86,7 @@ var DataTableHeaderCellFilterComponent = (function () {
     DataTableHeaderCellFilterComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'datatable-header-cell-filter',
-                    template: "\n    <div>\n      <span\n        *ngIf=\"!column.headerTemplate\"\n        class=\"datatable-header-cell-wrapper\">\n        <span\n          class=\"datatable-header-cell-label\">\n          <input class=\"form-control\" (keyup)=\"inputChanged($event)\" placeholder=\"Filter {{name}}...\"/>\n        </span>\n      </span>\n    </div>\n  ",
+                    template: "\n    <div>\n      <span\n        class=\"datatable-header-cell-wrapper\">\n        <span\n          class=\"datatable-header-cell-label\">\n          <input *ngIf=\"showFilter\" class=\"form-control\" (keyup)=\"inputChanged($event)\" placeholder=\"Filter {{name}}...\"/>\n        </span>\n      </span>\n    </div>\n  ",
                     styles: ["\n    .form-control {\n      width: 100%\n    }\n    "]
                 },] },
     ];
