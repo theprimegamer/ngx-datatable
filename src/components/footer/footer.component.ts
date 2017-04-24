@@ -9,10 +9,6 @@ import {
       [ngClass]="{'selected-count': selectedMessage}"
       [style.height.px]="footerHeight">
       <div class="page-count">
-        <span *ngIf="selectedMessage">
-          {{selectedCount.toLocaleString()}} {{selectedMessage}} / 
-        </span>
-
         Showing {{firstItemNumber.toLocaleString()}} - {{lastItemNumber.toLocaleString()}} of  {{rowCount.toLocaleString()}}
       </div>
       <datatable-pager
