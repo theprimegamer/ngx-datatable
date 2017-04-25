@@ -21,7 +21,8 @@ import { SortDirection } from '../../types';
       </label>
       <span
         *ngIf="!column.cellTemplate"
-        [innerHTML]="value">
+        [innerHTML]="value"
+        role="cell">
       </span>
       <template
         *ngIf="column.cellTemplate"

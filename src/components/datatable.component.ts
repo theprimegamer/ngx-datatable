@@ -19,7 +19,8 @@ import { DatatableRowDetailDirective } from './row-detail';
   template: `
     <div
       visibility-observer
-      (visible)="recalculate()">
+      (visible)="recalculate()"
+      role="table">
       <datatable-header
         *ngIf="headerHeight"
         [sorts]="sorts"

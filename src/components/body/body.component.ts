@@ -44,7 +44,8 @@ import { ScrollerComponent } from './scroller.component';
             [columns]="columns"
             [rowHeight]="rowHeight"
             [row]="row"
-            (activate)="selector.onActivate($event, i)">
+            (activate)="selector.onActivate($event, i)"
+            role="row">
           </datatable-body-row>
         </datatable-row-wrapper>
       </datatable-scroller>

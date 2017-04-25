@@ -24,7 +24,8 @@ import { nextSortDir } from '../../utils';
         <span
           class="datatable-header-cell-label draggable"
           (click)="onSort()"
-          [innerHTML]="name">
+          [innerHTML]="name"
+          role="columnheader">
         </span>
       </span>
       <template

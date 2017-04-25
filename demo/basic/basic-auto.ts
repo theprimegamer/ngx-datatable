@@ -17,6 +17,25 @@ import { Component } from '@angular/core';
         [minFilterLength]="5">
       </ngx-datatable>
     </div>
+
+    <!--div role="table">
+      <div role="row">
+        <div role="columnheader">Name</div>
+        <div role="columnheader">State</div>
+      </div>
+      <div role="row">
+        <div role="cell">Frank</div>
+        <div role="cell">Maine</div>
+      </div>
+      <div role="row">
+        <div role="cell">Tom</div>
+        <div role="cell">Colorado</div>
+      </div>
+      <div role="row">
+        <div role="cell">John</div>
+        <div role="cell">Virginia</div>
+      </div>
+    </div-->
   `
 })
 export class BasicAutoComponent {

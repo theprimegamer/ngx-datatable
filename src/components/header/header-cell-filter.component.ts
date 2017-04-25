@@ -13,7 +13,8 @@ import { nextSortDir } from '../../utils';
         class="datatable-header-cell-wrapper">
         <span
           class="datatable-header-cell-label">
-          <input *ngIf="showFilter" class="form-control" (keyup)="inputChanged($event)" placeholder="Filter {{name}}..."/>
+          <label id="labelFilter{{name}}" class="hidden">Filter for {{name}}</label>
+          <input *ngIf="showFilter" class="form-control" (keyup)="inputChanged($event)" placeholder="Filter {{name}}..." attr.aria-labelledby="labelFilter{{name}}"/>
         </span>
       </span>
     </div>
@@ -21,6 +22,9 @@ import { nextSortDir } from '../../utils';
   styles: [ `
     .form-control {
       width: 100%
+    }
+    .hidden {
+      display: none;
     }
     ` ]
 })
