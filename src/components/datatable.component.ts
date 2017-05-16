@@ -190,6 +190,14 @@ export class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
   @Input() columnMode: ColumnMode = ColumnMode.standard;
 
   /**
+   * Extra padding on the left and right of the table.
+   *
+   * @type number
+   * @memberOf DatatableComponent
+   */
+  @Input() padding: number = 0;
+
+  /**
    * The minimum header height in pixels.
    * Pass a falsey for no header
    *
@@ -766,7 +774,7 @@ export class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
 
     if (!columns) return;
 
-    let width = this.innerWidth;
+    let width = this.innerWidth - this.padding;
     if (this.scrollbarV) {
       width = width - scrollbarWidth;
     }

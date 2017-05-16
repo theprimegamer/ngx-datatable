@@ -105,7 +105,7 @@ export function forceFillColumnWidths(
   expectedWidth: number,
   startIdx: number,
   allowBleed: boolean,
-  defaultColWidth: number = 300) {
+  defaultColWidth: number = 10) {
   
   const columnsToResize = allColumns
     .slice(startIdx + 1, allColumns.length)
