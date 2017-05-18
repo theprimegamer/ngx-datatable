@@ -11,6 +11,21 @@ import {
       <div class="page-count">
         Showing {{firstItemNumber.toLocaleString()}} - {{lastItemNumber.toLocaleString()}} of  {{rowCount.toLocaleString()}}
       </div>
+      <div class="page-size">
+        <select #s (change)="selectRowCountDisplay(s.value)">
+          <ng-container *ngFor="let option of rowCountOptions; let i = index">
+            <option [value]="option" *ngIf="option == pageSize" selected>
+              Display {{option}} Per Page
+            </option>
+            <option [value]="option" *ngIf="option != pageSize">
+              Display {{option}} Per Page
+            </option>
+          </ng-container>
+          <option [value]="-1"> 
+            Display All
+          </option>
+        </select>
+      </div>
       <datatable-pager
         [pagerLeftArrowIcon]="pagerLeftArrowIcon"
         [pagerRightArrowIcon]="pagerRightArrowIcon"
@@ -33,6 +48,7 @@ export class DataTableFooterComponent {
 
   @Input() footerHeight: number;
   @Input() rowCount: number;
+  @Input() rowCountOptions = [10, 25, 50, 100];
   @Input() pageSize: number;
   @Input() offset: number;
   @Input() pagerLeftArrowIcon: string;
@@ -45,6 +61,7 @@ export class DataTableFooterComponent {
   @Input() selectedMessage: string | boolean;
 
   @Output() page: EventEmitter<any> = new EventEmitter();
+  @Output() pageSizeSelected = new EventEmitter<number>();
 
   get isVisible(): boolean {
     return (this.rowCount / this.pageSize) > 1;
@@ -60,5 +77,10 @@ export class DataTableFooterComponent {
 
   get lastItemNumber(): number {
     return Math.min(this.curPage * this.pageSize, this.rowCount);
+  }
+
+  selectRowCountDisplay(newValue: number) {
+    this.pageSize = newValue;
+    this.pageSizeSelected.emit(newValue);
   }
 }

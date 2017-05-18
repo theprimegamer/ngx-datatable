@@ -81,7 +81,8 @@ import { DatatableRowDetailDirective } from './row-detail';
         [selectedCount]="selected.length"
         [selectedMessage]="!!selectionType && messages.selectedMessage"
         [pagerNextIcon]="cssClasses.pagerNext"
-        (page)="onFooterPage($event)">
+        (page)="onFooterPage($event)"
+        (pageSizeSelected)="pageSizeSelected($event)">
       </datatable-footer>
     </div>
   `,
@@ -1041,5 +1042,18 @@ export class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
    filtersChanged(event: any): void {
       this.offset = 0;
       this.filter.emit(event);
+   }
+
+   /**
+   * Page Size was changed in the footer
+   * 
+   * @param {*} event
+   * New row count that was selected
+   * 
+   * @memberOf DatatableComponent
+   */
+   pageSizeSelected($event: any): void {
+     this.offset = 0;
+     this.pageSize = $event;
    }
 }
