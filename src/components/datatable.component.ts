@@ -82,7 +82,7 @@ import { DatatableRowDetailDirective } from './row-detail';
         [selectedMessage]="!!selectionType && messages.selectedMessage"
         [pagerNextIcon]="cssClasses.pagerNext"
         (page)="onFooterPage($event)"
-        (pageSizeSelected)="pageSizeSelected($event)">
+        (pageSizeSelected)="onPageSizeSelected($event)">
       </datatable-footer>
     </div>
   `,
@@ -455,6 +455,14 @@ export class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
   @Output() page: EventEmitter<any> = new EventEmitter();
 
   /**
+   * The page size changed from the select in the footer
+   *
+   * @type {EventEmitter<number>}
+   * @memberOf DatatableComponent
+   */
+  @Output() pageSizeSelected: EventEmitter<number> = new EventEmitter();
+
+  /**
    * Columns were re-ordered.
    *
    * @type {EventEmitter<any>}
@@ -816,8 +824,10 @@ export class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
    * @memberOf DatatableComponent
    */
   recalculatePages(): void {
+    console.log("Before - " + this.pageSize)
     this.pageSize = this.calcPageSize();
     this.rowCount = this.calcRowCount();
+    console.log("After - " + this.pageSize);
   }
 
   /**
@@ -1052,8 +1062,10 @@ export class DatatableComponent implements OnInit, AfterViewInit, DoCheck {
    * 
    * @memberOf DatatableComponent
    */
-   pageSizeSelected($event: any): void {
+   onPageSizeSelected(event: any): void {
      this.offset = 0;
-     this.pageSize = $event;
+     this.pageSize = event;
+     this.limit = event;
+     this.pageSizeSelected.emit(event);
    }
 }

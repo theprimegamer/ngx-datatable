@@ -21,9 +21,6 @@ import {
               Display {{option}} Per Page
             </option>
           </ng-container>
-          <option [value]="-1"> 
-            Display All
-          </option>
         </select>
       </div>
       <datatable-pager

@@ -14,7 +14,8 @@ import { Component } from '@angular/core';
         [headerHeight]="100"
         [footerHeight]="50"
         [rowHeight]="'auto'"
-        [minFilterLength]="5">
+        [minFilterLength]="5"
+        (pageSizeSelected)="onPageSizeSelect($event)">
       </ngx-datatable>
     </div>
 
@@ -65,6 +66,10 @@ export class BasicAutoComponent {
     };
 
     req.send();
+  }
+
+  onPageSizeSelect(e: any) {
+    alert(e);
   }
 
 }
